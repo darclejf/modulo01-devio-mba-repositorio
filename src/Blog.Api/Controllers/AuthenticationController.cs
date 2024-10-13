@@ -1,5 +1,5 @@
 ﻿using Blog.Data.Interfaces.Application;
-using Blog.Data.Interfaces.Application.Models;
+using Blog.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Api.Controllers
@@ -16,7 +16,7 @@ namespace Blog.Api.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterUserApplicationModel request)
+        public async Task<IActionResult> Register([FromBody] RegisterUserModel request)
         {
             if (!ModelState.IsValid) 
                 return ValidationProblem(ModelState);

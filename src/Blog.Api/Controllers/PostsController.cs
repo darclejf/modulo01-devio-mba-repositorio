@@ -49,17 +49,18 @@ namespace Blog.Api.Controllers
         public async Task<IActionResult> Post([FromBody] PostCreateApiModel model)
         {
             //TODO validacoes
-            var post = Data.Entities.Post.Create(model.Title, model.Description, model.AuthorId);
-            post = await _postApplication.AddAsync(post);
-            return Ok(_mapper.Map<PostApiModel>(post));
+            //var post = Data.Entities.Post.Create(model.Title, model.Description, model.AuthorId);
+            //post = await _postApplication.AddAsync(post);
+            //return Ok(_mapper.Map<PostApiModel>(post));
+            throw new NotImplementedException();
         }
 
         // PUT api/<PostsController>/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] PostUpdateApiModel model)
         {
-            var result = await _postApplication.UpdateAsync(id, model.Title, model.Description);
-            return Ok(result);
+            //var result = await _postApplication.UpdateAsync(id, model.Title, model.Description);
+            throw new NotImplementedException();
         }
 
         // DELETE api/<PostsController>/5

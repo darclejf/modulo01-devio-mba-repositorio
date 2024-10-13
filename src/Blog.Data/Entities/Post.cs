@@ -3,20 +3,21 @@
     public class Post : AbstractEntity
     {
         public string Title { get; protected set; }
+        public string SubTitle { get; protected set; }
         public string Description { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
         public DateTime UpdateAt { get; protected set; }
         public bool Active { get; protected set; }
         //public int NumberOfViews { get; protected set; }
-        public string AuthorId { get; protected set; }
         public Author Author { get; protected set; }
+        public long AuthorId { get; protected set; }
 
         private readonly IList<Comment> _comments = [];
         public IEnumerable<Comment> Comments { get { return _comments; } }
 
         protected Post() { }
 
-        public static Post Create(string title, string description, string authorId)
+        public static Post Create(string title, string description, Author author, string subTitle = "")
         {
             //TODO validacoes
             return new Post { 
@@ -25,7 +26,8 @@
                 CreatedAt = DateTime.Now, 
                 UpdateAt = DateTime.Now,
                 Active = true, 
-                AuthorId = authorId 
+                AuthorId = author.Id,
+                SubTitle = subTitle
             };   
         }
 
@@ -41,18 +43,15 @@
             UpdateAt = DateTime.Now;
         }
         
-        public void ChangeTitle(string title) 
+        public void Change(string title, string description, string subTitle) 
         {
             //TODO validacoes
             Title = title;
+            Description = description;
+            SubTitle = subTitle;
             UpdateAt = DateTime.Now;
         } 
 
-        public void ChangeDescription(string description) 
-        {
-            Description = description;
-            UpdateAt = DateTime.Now;
-        }
 
         public void AddComment(Comment comment)
         {

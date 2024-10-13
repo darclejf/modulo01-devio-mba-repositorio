@@ -1,0 +1,45 @@
+﻿@{
+    Layout = "/Views/Shared/_LayoutCustom.cshtml";
+}
+
+@model PostViewModel
+
+<!-- Page Header-->
+@{
+    var imageStyle = "";
+    if (string.IsNullOrEmpty(Model.UrlImage))
+    {
+        imageStyle = $"background-image: url('{@Model.UrlImage}')";
+    }
+}
+<header class="masthead" style="@imageStyle">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="post-heading">
+                    <h1>@Model.Title</h1>
+                    <h2 class="subheading">@Model.SubTitle</h2>
+                    <span class="meta">
+                        Postado por 
+                        <a href="#!">@Model.Author</a>
+                        em @Model.CreateAt.ToString("dd/MM/yyyy HH:mm")
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Post Content-->
+<article class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                @Html.Raw(Model.Description)
+            </div>
+        </div>
+        <hr />
+        <h1>Comentários</h1>
+        <partial name="_EditComment" model="new CommentPostModel { PostId = Model.Id }" />
+        <partial name="_ListComments" model="Model.Comments" />
+    </div>
+</article>

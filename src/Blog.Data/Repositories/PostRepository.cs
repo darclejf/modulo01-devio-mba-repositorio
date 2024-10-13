@@ -6,19 +6,9 @@ using System.Linq.Expressions;
 
 namespace Blog.Data.Repositories
 {
-    public class PostRepository : IPostRepository
+    public class PostRepository : AbstractBaseRepository, IPostRepository
     {
-        private readonly BlogDbContext _dbContext;
-
-        public PostRepository(BlogDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
-
-        public async Task CommitAsync()
-        {
-            await _dbContext.SaveChangesAsync();
-        }
+        public PostRepository(BlogDbContext dbContext) : base(dbContext) { }
 
         public async Task<bool> DeleteAsync(long id)
         {
@@ -32,19 +22,31 @@ namespace Blog.Data.Repositories
 
         public async Task<Post> GetAsNotTrackingAsync(Expression<Func<Post, bool>> spec)
         {
-            var post = await _dbContext.Posts.AsNoTracking().FirstOrDefaultAsync(spec);
+            var post = await _dbContext.Posts
+                                        .Include(x => x.Author)
+                                        .Include(x => x.Comments)
+                                        .AsNoTracking()
+                                        .FirstOrDefaultAsync(spec);
             return post;
         }
 
-        public async Task<Post> GetAsTrackingAsync(Expression<Func<Post, bool>> spec)
+        public async Task<Post?> GetAsTrackingAsync(Expression<Func<Post, bool>> spec)
         {
-            var post = await _dbContext.Posts.AsTracking().FirstOrDefaultAsync(spec);
+            var post = await _dbContext.Posts
+                                        .Include(x => x.Author)
+                                        .Include(x => x.Comments)
+                                        .AsTracking()
+                                        .FirstOrDefaultAsync(spec);
             return post;
         }
 
-        public Task<IEnumerable<Post>> GetPagedAsNoTrackingAsync(int page, int take)
+        public async Task<IEnumerable<Post>> GetPagedAsNoTrackingAsync(int page, int take)
         {
-            throw new NotImplementedException();
+            var skip = (page-1) * take;
+            return await _dbContext.Posts
+                                    .Include(post => post.Author)
+                                    .OrderByDescending(x => x.CreatedAt)
+                                    .Skip(skip).Take(take).ToListAsync();
         }
 
         public Task<IEnumerable<Post>> GetPagedAsNoTrackingAsync(int page, int take, Expression<Func<Post, bool>> spec)

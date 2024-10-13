@@ -5,8 +5,11 @@
 Bem-vindo ao repositório do projeto **Blog Módulo 01 MBA**. Este projeto é uma entrega do MBA DevXpert Full Stack .NET e é referente ao módulo **Introdução ao Desenvolvimento ASP.NET Core**.
 O objetivo principal desenvolver uma aplicação de blog que permite aos usuários criar, editar, visualizar e excluir posts e comentários, tanto através de uma interface web utilizando MVC quanto através de uma API RESTful.
 
+<span style="color:red">
 **Esta é a primeira versão com API funcional apenas para registro de usuário, inclusão e exclusão de post sem necessidade de login e autorização.**
-**Comentários 'TODO' no projeto com algumas dúvidas**
+**Para essa versão do Projeto MVC, não há dados prévios em banco. É possível registrar um usuário que é um autor e cadastrar posts e comentários.**
+**Por favor, se possível verifique os Comentários 'TODO' no projeto com algumas dúvidas, obrigado**
+</span>
 
 ### **Autor(es)**
 - **Darclê José**

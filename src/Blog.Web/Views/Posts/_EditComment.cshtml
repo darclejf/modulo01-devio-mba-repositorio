@@ -1,0 +1,15 @@
+﻿@model CommentPostModel
+<div class="row">
+    <div class="col-md-12">
+        <form asp-controller="Posts" asp-action="SaveComment">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="PostId" />
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <input type="submit" value="Salvar" class="btn btn-primary" />
+        </form>
+    </div>
+</div>

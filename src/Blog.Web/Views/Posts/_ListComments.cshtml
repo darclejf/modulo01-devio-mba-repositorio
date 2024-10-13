@@ -1,0 +1,10 @@
+﻿@model IEnumerable<CommentPostModel>
+
+@foreach (var comment in Model)
+{
+    <div class="row">
+        <div class="col-md-12">
+            @comment.Description
+        </div>
+    </div>
+}   

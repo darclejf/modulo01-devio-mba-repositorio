@@ -10,6 +10,7 @@ namespace Blog.Api.Settings
         public static WebApplicationBuilder AddRepositoresSettings(this WebApplicationBuilder builder)
         {
             builder.Services.AddScoped<IPostRepository, PostRepository>();
+            builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 
             builder.Services.AddScoped<IAuthenticationApplicationServices, AuthenticationApplicationServices>();
             builder.Services.AddScoped<IPostApplicationServices, PostApplicationServices>();
