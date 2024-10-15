@@ -9,9 +9,11 @@ namespace Blog.Data.Contexts.Mappings
         public void Configure(EntityTypeBuilder<Author> builder)
         {
             builder.ToTable("blog_authors");
-            //builder.HasOne(p => p.User)
-            //        .WithOne()
-            //        .HasForeignKey("UserId");
+
+            builder.HasKey(p => p.Id);
+
+            builder.HasOne(p => p.User)
+                .WithOne();
         }
     }
 }

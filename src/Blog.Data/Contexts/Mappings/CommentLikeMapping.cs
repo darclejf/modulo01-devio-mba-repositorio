@@ -9,6 +9,9 @@ namespace Blog.Data.Contexts.Mappings
         public void Configure(EntityTypeBuilder<CommentLike> builder)
         {
             builder.ToTable("blog_comments_likes");
+
+            builder.HasKey(p => p.Id);
+
             builder.HasOne(p => p.Comment)
                     .WithOne()
                     .HasForeignKey<CommentLike>(p => p.CommentId);

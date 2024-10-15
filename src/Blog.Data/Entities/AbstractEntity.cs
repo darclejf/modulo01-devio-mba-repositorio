@@ -1,7 +1,10 @@
-﻿namespace Blog.Data.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Blog.Data.Entities
 {
     public abstract class AbstractEntity
     {
-        public long Id { get; protected set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long Id { get; set; }
     }
 }
