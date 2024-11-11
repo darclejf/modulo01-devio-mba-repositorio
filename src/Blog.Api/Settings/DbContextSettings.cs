@@ -7,12 +7,20 @@ namespace Blog.Api.Settings
     {
         public static WebApplicationBuilder AddDbContextSettings(this WebApplicationBuilder builder)
         {
-            builder.Services.AddDbContext<BlogDbContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-            });
-
-            return builder;
-        }
+			if (builder.Environment.IsDevelopment())
+			{
+				builder.Services.AddDbContext<BlogDbContext>(options =>
+					options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+			}
+			else
+			{
+				builder.Services.AddDbContext<BlogDbContext>(options =>
+				{
+					options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+								.LogTo(Console.WriteLine, LogLevel.Information);
+				});
+			}
+			return builder;
+		}
     }
 }

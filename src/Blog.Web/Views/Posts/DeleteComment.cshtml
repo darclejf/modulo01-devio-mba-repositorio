@@ -1,0 +1,20 @@
+﻿@model CommentPostModel
+<h1>Delete</h1>
+
+<h3>Deseja excluir este Comentário?</h3>
+<div>
+    <hr />
+    <div class="row">
+@*         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt> *@
+        <div class="col-sm-10">
+            @Html.Raw(Model.Description)
+        </div>
+    </div>
+    <form asp-action="DeleteCommentConfirm">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Excluir" class="btn btn-danger" /> |
+        <a asp-area="" asp-controller="Posts" asp-action="View" asp-route-id="@Model.Id">Cancelar</a>
+    </form>
+</div>

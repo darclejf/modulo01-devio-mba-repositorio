@@ -2,32 +2,33 @@
     Layout = "/Views/Shared/_LayoutCustom.cshtml";
 }
 
-
-@model IEnumerable<PostViewModel>
-<partial name="_LayoutCustomHeaderPartial" />
+@model ListPostViewModel
+<partial name="_HeaderPartial" />
 <div class="container px-4 px-lg-5">    
     <div class="row gx-4 gx-lg-5 justify-content-center">
-        <div class="col-md-10 col-lg-8 col-xl-7">
-            @foreach (var post in Model)
-            {
-                <!-- Post preview-->
-                <div class="post-preview">
-                    <a asp-area="" asp-controller="Posts" asp-action="View" asp-route-id="@post.Id">
-                        <h2 class="post-title">@post.Title</h2>
-                        <h3 class="post-subtitle">@post.SubTitle</h3>
-                    </a>
-                    <p class="post-meta">
-                        Postado por
-                        <a href="#!">@post.Author</a>
-                        em @post.CreateAt.ToString("dd/MM/yyyy HH:mm")
-                    </p>
-                </div>
-                <!-- Divider-->
-                <hr class="my-4" />
-                <!-- Post preview-->
-            }
-            <!-- Pager-->
-            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+        <div class="col-md-10 col-lg-8 col-xl-7" >
+            <div id="listPosts">
+                @await Html.PartialAsync("_ListPosts", Model)
+            </div>
+            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!" id="btnAddPosts">Mais Posts</a></div>
+            <input type="hidden" id="page" value="@Model.Page" />
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        $(document).on('click', '#btnAddPosts', function (e) {
+            let page = parseInt($('#page').val()) + 1;
+            $.ajax({
+                url: '/Posts/List/' + page,
+                success: function (partialView) {
+                    $('#listPosts').append(partialView);
+                    $('#page').val(page);
+                }
+            });
+        });
+    </script>
+}
+

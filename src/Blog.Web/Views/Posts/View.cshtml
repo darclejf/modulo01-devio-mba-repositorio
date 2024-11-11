@@ -22,7 +22,7 @@
                     <span class="meta">
                         Postado por 
                         <a href="#!">@Model.Author</a>
-                        em @Model.CreateAt.ToString("dd/MM/yyyy HH:mm")
+                        em @Model.CreatedAt.ToString("dd/MM/yyyy HH:mm")
                     </span>
                 </div>
             </div>
@@ -32,14 +32,27 @@
 <!-- Post Content-->
 <article class="mb-4">
     <div class="container px-4 px-lg-5">
+        @if (ViewBag.Edit) {
         <div class="row gx-4 gx-lg-5 justify-content-center">
-            <div class="col-md-10 col-lg-8 col-xl-7">
+            <div class="col-md-12">
+                <div class="d-flex justify-content-end mb-4">
+                    <a class="btn btn-primary text-uppercase" asp-action="Edit" asp-route-id="@Model.Id">Editar</a>
+                    <a class="btn btn-danger text-uppercase" asp-action="Delete" asp-route-id="@Model.Id">Excluir</a>
+                </div>
+            </div>
+        </div>
+        }
+        <div class="row gx-4 gx-lg-5">
+            <div class="col-md-12">
                 @Html.Raw(Model.Description)
             </div>
         </div>
         <hr />
-        <h1>Comentários</h1>
+        <h1>Adicionar Comentário</h1>
         <partial name="_EditComment" model="new CommentPostModel { PostId = Model.Id }" />
+        <hr />
+
+        <h1>Lista Comentários</h1>
         <partial name="_ListComments" model="Model.Comments" />
     </div>
 </article>

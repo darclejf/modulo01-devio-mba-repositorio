@@ -7,6 +7,7 @@ builder
     .AddIdentitySettings()
     .AddRepositoresSettings();
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

@@ -1,7 +1,7 @@
 ﻿using Blog.Data.Entities;
 using System.Linq.Expressions;
 
-namespace Blog.Data.Interfaces.Repositories
+namespace Blog.Data.Interfaces
 {
     public interface IAuthorRepository
     {

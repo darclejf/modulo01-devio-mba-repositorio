@@ -52,10 +52,14 @@
             UpdateAt = DateTime.Now;
         } 
 
-
-        public void AddComment(Comment comment)
+        public void AddComment(string description, string userId)
         {
-            _comments.Add(comment);
+            _comments.Add(Comment.Create(description, userId, Id));
+        }
+
+        public void DeleteComment(Comment comment)  
+        {
+            _comments.Remove(comment);
         }
     }
 }

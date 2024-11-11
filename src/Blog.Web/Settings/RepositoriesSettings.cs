@@ -1,11 +1,11 @@
-﻿using Blog.Data.Application;
-using Blog.Data.Interfaces.Application;
-using Blog.Data.Interfaces.Repositories;
+﻿using Blog.Application.Interfaces;
+using Blog.Application.Services;
+using Blog.Data.Interfaces;
 using Blog.Data.Repositories;
 
 namespace Blog.Web.Settings
 {
-    public static class RepositoriesSettings
+	public static class RepositoriesSettings
     {
         public static WebApplicationBuilder AddRepositoresSettings(this WebApplicationBuilder builder)
         {

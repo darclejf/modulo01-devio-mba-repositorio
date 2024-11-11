@@ -1,0 +1,26 @@
+﻿@model ListPostViewModel
+@if (Model.Posts == null || Model.Posts.Count() == 0)
+{
+    <p>Não existem mais registros </p>
+}
+else {
+    @foreach (var post in Model.Posts)
+    {
+        <!-- Post preview-->
+        <div class="post-preview">
+            <a asp-area="" asp-controller="Posts" asp-action="View" asp-route-id="@post.Id">
+                <h2 class="post-title">@post.Title</h2>
+                <h3 class="post-subtitle">@post.SubTitle</h3>
+            </a>
+            <p class="post-meta">
+                Postado por
+                <a href="#!">@post.Author</a>
+                em @post.CreatedAt.ToString("dd/MM/yyyy HH:mm")
+            </p>
+        </div>
+        <!-- Divider-->
+        <hr class="my-4" />
+        <!-- Post preview-->
+    
+    }
+}

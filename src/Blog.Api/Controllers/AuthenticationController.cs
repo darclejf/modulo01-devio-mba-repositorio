@@ -1,6 +1,7 @@
-﻿using Blog.Data.Interfaces.Application;
-using Blog.Data.Models;
+﻿using Blog.Application.Interfaces;
+using Blog.Application.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Blog.Api.Controllers
 {
@@ -26,6 +27,18 @@ namespace Blog.Api.Controllers
                 return Problem("Falha ao registrar o usuário");
 
             return Ok(result);
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginUserModel request)
+        {
+            if (!ModelState.IsValid)
+                return ValidationProblem(ModelState);
+
+            var result = await _authenticationApplication.LoginAsync(request);
+            if (string.IsNullOrEmpty(result))
+                return Problem("Usuário ou senha incorretos");
+            return Ok(result);            
         }
     }
 }

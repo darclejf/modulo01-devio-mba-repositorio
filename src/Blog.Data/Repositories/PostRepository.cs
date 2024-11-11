@@ -1,6 +1,6 @@
 ﻿using Blog.Data.Contexts;
 using Blog.Data.Entities;
-using Blog.Data.Interfaces.Repositories;
+using Blog.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -25,6 +25,7 @@ namespace Blog.Data.Repositories
             var post = await _dbContext.Posts
                                         .Include(x => x.Author)
                                         .Include(x => x.Comments)
+                                            .ThenInclude(x => x.User)
                                         .AsNoTracking()
                                         .FirstOrDefaultAsync(spec);
             return post;
@@ -35,6 +36,7 @@ namespace Blog.Data.Repositories
             var post = await _dbContext.Posts
                                         .Include(x => x.Author)
                                         .Include(x => x.Comments)
+                                            .ThenInclude(x => x.User)
                                         .AsTracking()
                                         .FirstOrDefaultAsync(spec);
             return post;

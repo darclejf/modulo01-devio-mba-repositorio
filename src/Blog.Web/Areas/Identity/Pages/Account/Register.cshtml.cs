@@ -1,7 +1,7 @@
+using Blog.Application.Interfaces;
+using Blog.Application.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Blog.Data.Models;
-using Blog.Data.Interfaces.Application;
 
 namespace Blog.Web.Areas.Identity.Pages.Account
 {
@@ -23,8 +23,7 @@ namespace Blog.Web.Areas.Identity.Pages.Account
         {
             ReturnUrl = returnUrl;
         }
-
-        [ValidateAntiForgeryToken]
+       
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");

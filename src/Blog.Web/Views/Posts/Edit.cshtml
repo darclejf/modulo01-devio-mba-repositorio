@@ -1,0 +1,68 @@
+﻿@model EditPostModel
+@* <link rel="stylesheet" href="../../assets/vendor/ckeditor5.css"> *@
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <h2>Novo Post.</h2>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input asp-for="Id" class="form-control" type="hidden" />
+            <div class="form-floating mb-3">
+                <input asp-for="Title" class="form-control" placeholder="" />
+                <label asp-for="Title">@Html.DisplayNameFor(model => model.Title)</label>
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">                
+                <input asp-for="SubTitle" class="form-control" placeholder="" />
+                <label asp-for="SubTitle">@Html.DisplayNameFor(model => model.SubTitle)</label>
+            </div>
+            <div class="form-floating">
+                <textarea asp-for="Description" class="form-control" placeholder="" style="height: 200px"></textarea>
+                <label asp-for="Description">@Html.DisplayNameFor(model => model.Description)</label>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <br />
+            <button type="submit" class="w-100 btn btn-lg btn-primary">Salvar</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    @*     <script type="importmap">
+        {
+            "imports": {
+                "ckeditor5": "../../assets/vendor/ckeditor5.js",
+                "ckeditor5/": "../../assets/vendor/"
+            }
+        }
+    </script>
+    <script type="module">
+        import {
+            ClassicEditor,
+            Essentials,
+            Paragraph,
+            Bold,
+            Italic,
+            Font
+        } from 'ckeditor5';
+
+        ClassicEditor
+            .create(document.querySelector('#Description'), {
+                plugins: [ Essentials, Paragraph, Bold, Italic, Font ],
+                toolbar: [
+                    'undo', 'redo', '|', 'bold', 'italic', '|',
+                    'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
+                ]
+            } )
+            .then( editor => {
+                window.editor = editor;
+            } )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>*@
+}

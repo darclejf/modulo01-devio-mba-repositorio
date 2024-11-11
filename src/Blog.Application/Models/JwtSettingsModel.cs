@@ -1,4 +1,4 @@
-﻿namespace Blog.Data.Interfaces.Application.Models
+﻿namespace Blog.Application.Models
 {
     public class JwtSettingsModel
     {
