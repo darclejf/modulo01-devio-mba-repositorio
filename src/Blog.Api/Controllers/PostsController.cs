@@ -57,34 +57,18 @@ namespace Blog.Api.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Post([FromBody] PostCreateApiModel model)
+        public async Task<IActionResult> Post([FromBody] CreatePostModel model)
         {
             var userLoggedId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var create = new CreatePostModel
-            {
-                Active = true,
-                Description = model.Description,
-                SubTitle = model.SubTitle,
-                Title = model.Title,
-            };
-
-            var post = await _postApplication.AddAsync(create, userLoggedId);
+            var post = await _postApplication.AddAsync(model, userLoggedId);
             return Ok(_mapper.Map<PostApiModel>(post));
         }
 
         [HttpPut("{id:long}")]
-        public async Task<IActionResult> Put(long id, [FromBody] PostUpdateApiModel model)
+        public async Task<IActionResult> Put(long id, [FromBody] EditPostModel model)
         {
             var userLoggedId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var create = new EditPostModel
-            {
-                Active = true,
-                Description = model.Description,
-                SubTitle = model.SubTitle,
-                Title = model.Title,
-            };
-
-            var post = await _postApplication.UpdateAsync(create, userLoggedId);
+            var post = await _postApplication.UpdateAsync(model, userLoggedId);
             return Ok(_mapper.Map<PostApiModel>(post));
         }
 

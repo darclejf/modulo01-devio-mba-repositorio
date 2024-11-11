@@ -14,8 +14,5 @@ namespace Blog.Application.Models
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         [Display(Name = "Descrição")]
         public string Description { get; set; }
-
-        [Display(Name = "Ativo")]
-        public bool Active { get; set; }
     }
 }

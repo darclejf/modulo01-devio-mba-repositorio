@@ -1,7 +1,6 @@
 ﻿using Blog.Application.Interfaces;
 using Blog.Application.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Blog.Api.Controllers
 {

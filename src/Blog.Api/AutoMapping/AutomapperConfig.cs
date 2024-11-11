@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Blog.Api.Models;
 using Blog.Data.Entities;
-using System.Xml.Linq;
 
 namespace Blog.Api.AutoMapping
 {
@@ -9,21 +8,11 @@ namespace Blog.Api.AutoMapping
     {
         public AutomapperConfig()
         {
-            CreateMap<Post, PostApiModel>();
-            CreateMap<Comment, CommentApiModel >();
+            CreateMap<Comment, CommentApiModel>()
+                .ForMember(dest => dest.UserName, m => m.MapFrom(a => a.User.UserName));
+
+            CreateMap<Post, PostApiModel>()
+                .ForMember(dest => dest.Author, m => m.MapFrom(a => a.Author.Name));
         }
     }
-
-	//public PostViewModel(Post entity)
-	//{
-	//	Id = entity.Id;
-	//	Title = entity.Title;
-	//	SubTitle = entity.SubTitle;
-	//	Description = entity.Description;
-	//	CreateAt = entity.CreatedAt;
-	//	Author = string.IsNullOrEmpty(entity.Author?.Name) ? "" : entity.Author?.Name;
-	//	Comments = entity.Comments == null ? [] : entity.Comments.Select(x => new CommentPostModel(x)).ToList();
-	//}
-
-
 }

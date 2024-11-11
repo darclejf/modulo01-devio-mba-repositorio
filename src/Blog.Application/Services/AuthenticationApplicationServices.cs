@@ -69,6 +69,20 @@ namespace Blog.Application.Services
             return result;
         }
 
+        public async Task<bool> RemoveAsync(string id)
+        {
+            try
+            {
+                var user = await _userManager.FindByIdAsync(id);
+                await _userManager.DeleteAsync(user);
+                return true;
+            }
+            catch
+            {
+                return false;
+            } 
+        }
+
         //public async Task<IdentityUser> GetCurrentUser()
         //{
         //    return await _userManager.GetUserAsync(ClaimTypes.Name);
